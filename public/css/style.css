@@ -1,0 +1,109 @@
+/* Admin */
+#adminBody {
+	background-color: #eee;
+}
+
+#sidebarContainer {
+	background-color: #c5bfbf;
+	height: 100%;
+}
+
+#menuChoices {
+	list-style-type: none;
+  font-size: 20pt;
+  padding-top: 15ex;
+  color: black;
+}
+#menuChoices a {
+  font-size: 18pt;
+  color: white;
+  width: 80%;
+  margin: 5px;
+}
+
+#teamName {
+	font-size: 16pt;
+	height: 60px;
+}
+
+#modalButtons button {
+  font-size: 16pt;
+  padding: 10px;
+  width: 25%;
+  margin: 16px;
+}
+
+#questionsPageContainer {
+	margin-top: 10%;
+}
+
+/* Team Page */
+#submitTeam {
+	font-size: 20pt;
+}
+
+#dingBtn {
+  width: 50%;
+  padding: 30px;
+  font-size: 35pt;
+}
+
+
+/* Scoreboard */
+#scoreboard {
+	background-color: #4600FF;
+}
+
+#scoreboard #teams {
+	color: white;
+	text-shadow: 1px 1px 1px #000;
+}
+
+.sectionColumns {
+	padding-left: 0;
+	padding-right: 0;
+}
+
+.sectionColumns h2 {
+  font-size: 52px;
+  font-family: jeapordy;
+	color: white;
+	text-shadow: 1px 1px 1px #000;
+}
+
+.scoreboardSquare {
+  font-family: jeapordy;
+  color: #EAA77E;
+  font-weight: bold;
+  font-size: 45pt;
+  outline: solid 2px black;
+  padding: 10px;
+  cursor: pointer;
+  text-shadow: 1px 6px 1px #000;
+}
+
+/* Question Card */
+
+#questionDialog {
+  width: 100%;
+  height: 100%;
+}
+
+#questionContent {
+  height: 70%;
+  background-color: #4600FF;
+  color: yellow;
+  font-family: jeapordy;
+  font-size: 75pt;
+  text-align: center;
+  text-shadow: 1px 6px 1px #000;
+}
+
+#questionContent p{
+  margin-top: 2ex;
+}
+
+@font-face {
+  font-family: 'jeapordy';
+  src: url('../fonts/jeapordy.ttf')  format('truetype')
+}

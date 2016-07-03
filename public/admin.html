@@ -1,0 +1,31 @@
+<html>
+	<head>
+		<title>Dinger! Admin</title>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"></link>
+		<link rel="stylesheet" href="css/style.css"></link>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	</head>
+	<body id="adminBody">
+		<div class="row">
+			<div class="col-md-3">
+				<div id="sidebarContainer">
+					<ul id="menuChoices">
+						<li><a href="javascript:void(0)" id="teamsButton" class="btn btn-primary">See Teams</a></li>
+						<li><a href="javascript:void(0)" id="questionsButton" class="btn btn-primary">Manage Questions</a></li>
+						<li><a href="/scoreboard" class="btn btn-primary" target="_blank">Launch Scoreboard</a></li>
+						<li><a href="javascript:void(0)" id="resetBtn" class="btn btn-danger" target="_blank">Reset Button</a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="col-md-9">
+				<div id="templateContainer">
+					<h1 class="text-center">Make selection from the menu on the left</h1>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script src="/socket.io/socket.io.js"></script>
+	<script src="lib/jquery.loadTemplate-1.5.7.min.js"></script>
+	<script src="/js/admin.js"></script>
+</html>

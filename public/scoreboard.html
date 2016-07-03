@@ -1,0 +1,130 @@
+<html>
+	<head>
+		<title>Dinger! Scoreboard</title>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"></link>
+		<link rel="stylesheet" href="css/style.css"></link>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	</head>
+	<body id="scoreboard">
+		<div id="templateContainer"class="row">
+			<div class="col-md-2 sectionColumns">
+				<h2 class="text-center" id="category0">Category 1</h2>
+				<div class="scoreboardSquare text-center" data-column="0" data-row="0">
+					<div class="scoreVal">100</div>
+				</div>
+				<div class="scoreboardSquare text-center" data-column="0" data-row="1">
+					<div class="scoreVal">200</div>
+				</div>
+				<div class="scoreboardSquare text-center" data-column="0" data-row="2">
+					<div class="scoreVal">300</div>
+				</div>
+				<div class="scoreboardSquare text-center" data-column="0" data-row="3">
+					<div class="scoreVal">400</div>
+				</div>
+				<div class="scoreboardSquare text-center" data-column="0" data-row="4">
+					<div class="scoreVal">500</div>
+				</div>
+			</div>
+			<div class="col-md-2 sectionColumns">
+				<h2 class="text-center" id="category1">Category 2</h2>
+				<div class="scoreboardSquare text-center" data-column="1" data-row="0">
+					<div class="scoreVal">100</div>
+				</div>
+				<div class="scoreboardSquare text-center" data-column="1" data-row="1">
+					<div class="scoreVal">200</div>
+				</div>
+				<div class="scoreboardSquare text-center" data-column="1" data-row="2">
+					<div class="scoreVal">300</div>
+				</div>
+				<div class="scoreboardSquare text-center" data-column="1" data-row="3">
+					<div class="scoreVal">400</div>
+				</div>
+				<div class="scoreboardSquare text-center" data-column="1" data-row="4">
+					<div class="scoreVal">500</div>
+				</div>
+			</div>
+			<div class="col-md-2 sectionColumns">
+				<h2 class="text-center" id="category2">Category 3</h2>
+				<div class="scoreboardSquare text-center" data-column="2" data-row="0">
+					<div class="scoreVal">100</div>
+				</div>
+				<div class="scoreboardSquare text-center" data-column="2" data-row="1">
+					<div class="scoreVal">200</div>
+				</div>
+				<div class="scoreboardSquare text-center" data-column="2" data-row="2">
+					<div class="scoreVal">300</div>
+				</div>
+				<div class="scoreboardSquare text-center" data-column="2" data-row="3">
+					<div class="scoreVal">400</div>
+				</div>
+				<div class="scoreboardSquare text-center" data-column="2" data-row="4">
+					<div class="scoreVal">500</div>
+				</div>				
+			</div>
+			<div class="col-md-2 sectionColumns">
+				<h2 class="text-center" id="category3">Category 4</h2>
+				<div class="scoreboardSquare text-center" data-column="3" data-row="0">
+					<div class="scoreVal">100</div>
+				</div>
+				<div class="scoreboardSquare text-center" data-column="3" data-row="1">
+					<div class="scoreVal">200</div>
+				</div>
+				<div class="scoreboardSquare text-center" data-column="3" data-row="2">
+					<div class="scoreVal">300</div>
+				</div>
+				<div class="scoreboardSquare text-center" data-column="3" data-row="3">
+					<div class="scoreVal">400</div>
+				</div>
+				<div class="scoreboardSquare text-center" data-column="3" data-row="4">
+					<div class="scoreVal">500</div>
+				</div>
+			</div>
+			<div class="col-md-2 sectionColumns">
+				<h2 class="text-center" id="category4">Category 5</h2>
+				<div class="scoreboardSquare text-center" data-column="4" data-row="0">
+					<div class="scoreVal">100</div>
+				</div>
+				<div class="scoreboardSquare text-center" data-column="4" data-row="1">
+					<div class="scoreVal">200</div>
+				</div>
+				<div class="scoreboardSquare text-center" data-column="4" data-row="2">
+					<div class="scoreVal">300</div>
+				</div>
+				<div class="scoreboardSquare text-center" data-column="4" data-row="3">
+					<div class="scoreVal">400</div>
+				</div>
+				<div class="scoreboardSquare text-center" data-column="4" data-row="4">
+					<div class="scoreVal">500</div>
+				</div>
+			</div>
+			<div class="col-md-2 sectionColumns">
+				<h2 class="text-center" id="category5">Category 6</h2>
+				<div class="scoreboardSquare text-center" data-column="5" data-row="0">
+					<div class="scoreVal">100</div>
+				</div>
+				<div class="scoreboardSquare text-center" data-column="5" data-row="1">
+					<div class="scoreVal">200</div>
+				</div>
+				<div class="scoreboardSquare text-center" data-column="5" data-row="2">
+					<div class="scoreVal">300</div>
+				</div>
+				<div class="scoreboardSquare text-center" data-column="5" data-row="3">
+					<div class="scoreVal">400</div>
+				</div>
+				<div class="scoreboardSquare text-center" data-column="5" data-row="4">
+					<div class="scoreVal">500</div>
+				</div>
+			</div>
+		</div>
+		<div id="teams" class="row"></div>
+			<!-- Button trigger modal -->
+		<button type="button" class="btn btn-primary btn-lg hide modalBtn" data-toggle="modal" data-target="#questionModal"></button>
+
+		<!-- Modal -->
+		<div id="modalContainer"></div>
+	</body>
+	<script src="/socket.io/socket.io.js"></script>
+	<script src="lib/jquery.loadTemplate-1.5.7.min.js"></script>
+	<script src="/js/scoreboard.js"></script>
+</html>
