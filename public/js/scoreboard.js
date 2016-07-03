@@ -18,6 +18,7 @@ var dinger = {
 		this.scoreboardSquare.on('click', dinger.scoreboardSquareShow);
 		dinger.socket.on('updateQuestions', dinger.updateQuestions)
 		dinger.updateCategories();
+		dinger.socket.on('emit score update', dinger.addAllTeams);
 	},
 	scoreboardSquareShow: function(){
 		var thatJquery = $(this);
@@ -30,6 +31,7 @@ var dinger = {
 			complete: function(){
 				$('.modalBtn').click();
 				thatJquery.children().css('visibility', 'hidden');
+				dinger.socket.emit('question selected', question);
 			}
 		});
 	},
@@ -56,7 +58,14 @@ var dinger = {
 				$('#category'+index).text(category);
 			}
 		})
-	}
+	},
+	addAllTeams: function(teams){
+		$('#teams').empty();
+		dinger.connectedTeams = teams;
+		dinger.connectedTeams.forEach(function(team){
+			dinger.addTeam(team);
+		});
+	},	
 }
 
 dinger.connectToSocket();

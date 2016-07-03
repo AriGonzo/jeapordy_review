@@ -14,10 +14,15 @@ var dinger = {
 			team_name: dinger.teamName
 		}, {
 			complete: function(){
-				dinger.connectedTeams.forEach(function(team){
-					dinger.addTeam(team);
-				});
+				dinger.addAllTeams();
 			}
+		});
+	},
+	addAllTeams: function(teams){
+		$('#teams').empty();
+		dinger.connectedTeams = teams;
+		dinger.connectedTeams.forEach(function(team){
+			dinger.addTeam(team);
 		});
 	},
 	showQuestionsAdmin: function(){
@@ -82,17 +87,22 @@ var dinger = {
 		$('#resetBtn').on('click', dinger.resetBtns);
 		$('#teamsButton').on('click', dinger.showTeamsAdmin);
 		$('#questionsButton').on('click', dinger.showQuestionsAdmin);
-		dinger.socket.on('updateQuestions', dinger.updateQuestions)
+		dinger.socket.on('updateQuestions', dinger.updateQuestions);
+		dinger.socket.on('currentQuestion', dinger.setCurrentQuestion);
+		dinger.socket.on('emit score update', dinger.addAllTeams);
 	},
 	handleTeamBuzz: function(teamObj){
-		console.log(teamObj)
 		$('#modalContainer').loadTemplate("../views/modalDing.html", {
 			team_name: teamObj.name
 		},{
 			complete: function(){
 				$('#modalBtn').click();
-				$('#wrongAnswer').on('click', dinger.resetBtns)
-				// $('#rightAnswer').on('click', )
+				$('#wrongAnswer').on('click', function(){
+					dinger.adjustScore(false, teamObj);
+				});
+				$('#rightAnswer').on('click', function(){
+					dinger.adjustScore(true, teamObj);
+				});
 			}
 		});
 	},
@@ -117,6 +127,19 @@ var dinger = {
 	},
 	addTeam: function(teamObj) {
 		$('#teams').append("<div class='col-md-3 text-center'><h2>"+teamObj.name+"</h2><h3>"+teamObj.score+"</h3></div>");
+	},
+	setCurrentQuestion: function(questionsObj){
+		dinger.currentQuestion = questionsObj;
+		console.log(dinger.currentQuestion)
+	},
+	adjustScore: function(correctAnswer, teamObj){
+		if (correctAnswer) {
+			teamObj.score += dinger.currentQuestion.value;
+		} else {
+			teamObj.score -= dinger.currentQuestion.value;
+			dinger.resetBtns();
+		}
+		dinger.socket.emit('update score', teamObj);
 	}
 }
 
