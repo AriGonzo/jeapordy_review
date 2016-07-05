@@ -5,7 +5,7 @@ var dinger = {
 	questions: [],
 	finalTimer: 60,
 	connectToSocket: function(){
-		var socket = io.connect('http://localhost:8080');
+		var socket = io.connect('https://sheltered-bayou-67211.herokuapp.com');
 		this.socket = socket;
 		dinger.turnOnListeners();
 		dinger.getTeams();
