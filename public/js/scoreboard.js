@@ -155,6 +155,16 @@ var dinger = {
 		$('.modal-backdrop').hide(); 
 		$('#questionModal').modal('hide');
 		$('#questionModal').hide();
+		var sortByWinners = _.sortBy(dinger.connectedTeams, 'score');
+		console.log(sortByWinners)
+		$('#modalContainer').loadTemplate("../views/modalFinalShow.html", {
+			answer: "Winning Team is: " + sortByWinners[sortByWinners.length - 1].name
+		}, {
+			complete: function(){
+				$('.modalBtn').click();
+			}
+		})
+
 	},
 	startTimer: function(time){
 		if (time == 0) {

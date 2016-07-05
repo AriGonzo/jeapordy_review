@@ -156,6 +156,10 @@ var dinger = {
 			dinger.openQuestions();
 		}
 		dinger.socket.emit('update score', teamObj);
+		$('.modal-backdrop').hide(); 
+		$('#questionModal').modal('hide');
+		$('#questionModal').hide();
+
 	},
 	triggerFinalJeopardy: function(){
 		dinger.socket.emit('final jeopardy');
