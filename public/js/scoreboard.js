@@ -21,14 +21,14 @@ var dinger = {
 		dinger.updateCategories();
 		dinger.socket.on('emit score update', dinger.addAllTeams);
 		dinger.socket.on('team buzzed', dinger.highlightDinger);
-		dinger.socket.on('unhighlight', dinger.highlightDinger);
+		dinger.socket.on('unhighlight', dinger.unhighlightDinger);
 		dinger.socket.on('trigger final jeopardy', dinger.triggerFinalJeopardy)
 		dinger.socket.on('final jeopardy array', dinger.updateFinal);
 	},
 	highlightDinger: function(teamObj){
 		$('#teams div[data-id="'+ teamObj.id +'"]').css('background', '#EAA77E')
 	},
-	unhighlightDinger: function(){
+	unhighlightDinger: function(teamObj){
 		$('#teams div[data-id="'+ teamObj.id +'"]').css('background', 'inherit')
 	},
 	scoreboardSquareShow: function(){
