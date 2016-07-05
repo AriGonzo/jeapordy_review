@@ -151,7 +151,7 @@ var dinger = {
 			teamObj.score += dinger.currentQuestion.value;
 		} else {
 			teamObj.score -= dinger.currentQuestion.value;
-			dinger.resetBtns();
+			dinger.openQuestions();
 		}
 		dinger.socket.emit('update score', teamObj);
 	},
