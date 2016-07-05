@@ -84,7 +84,8 @@ io.on('connection', function (socket) {
 				team.score = teamObj.score
 			}
 		});
-		io.emit('emit score update', teams)
+		io.emit('emit score update', teams);
+		io.emit('unhighlight', teamObj);
 	});
 
 	socket.on('final jeopardy', function(){

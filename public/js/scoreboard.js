@@ -76,7 +76,7 @@ var dinger = {
 		dinger.connectedTeams.forEach(function(team){
 			dinger.addTeam(team);
 		});
-		// dinger.unhighlightDinger();
+		dinger.unhighlightDinger();
 	},
 	triggerFinalJeopardy: function(finalJeopardyObj){
 		$('#modalContainer').loadTemplate("../views/modalFinal.html", {
