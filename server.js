@@ -25,9 +25,12 @@ app.get('/scoreboard', function (req, res) {
 var teams = [];
 var questions = [];
 var categories = [];
+var finalJeopardySubmissions = [];
+var finalJeopardy = {};
 var dung = false;
 
 io.on('connection', function (socket) {
+	
 	socket.on('grab teams', function(){
 		socket.emit('send teams', teams)
 	});
@@ -40,6 +43,7 @@ io.on('connection', function (socket) {
 		teams.push(teamObj);
 		io.emit('new team added', {teams: teams, newTeam: teamObj});
 	});
+
 	socket.on('ding', function(data){
 		if (!dung) {
 			var teamObj = _.findWhere(teams, {name: data});
@@ -47,18 +51,24 @@ io.on('connection', function (socket) {
 			dung = true;
 		}
 	});
+
 	socket.on('reset', function(){
 		dung = false;
 	});
-	socket.emit('updateQuestions', {categories: categories, questions: questions});
+
+	socket.emit('updateQuestions', {categories: categories, questions: questions, finalJeopardy: finalJeopardy});
+
 	socket.on('saveQuestions', function(questionsObj){
 		console.log('received questions', questionsObj)
-		categories = questionsObj.categories
-		questions = questionsObj.questions
+		categories = questionsObj.categories;
+		questions = questionsObj.questions;
+		finalJeopardy = questionsObj.finalJeopardy;
 	});
+
 	socket.on('question selected', function(questionObj){
 		io.emit('currentQuestion', questionObj);
 	});
+
 	socket.on('update score', function(teamObj){
 		teams.forEach(function(team){
 			if (team.name == teamObj.name) {
@@ -66,6 +76,23 @@ io.on('connection', function (socket) {
 			}
 		});
 		io.emit('emit score update', teams)
+	});
+
+	socket.on('final jeopardy', function(){
+		io.emit('trigger final jeopardy', finalJeopardy)
+	});
+
+	socket.on('submit final', function(finalJeopardyObj){
+		var team = _.findWhere(teams, {name: finalJeopardyObj.team});
+		finalJeopardyObj.id = team.id;
+		finalJeopardyObj.score = team.score;
+		finalJeopardySubmissions.push(finalJeopardyObj);
+		console.log(finalJeopardySubmissions)
+		io.emit('final jeopardy array', finalJeopardySubmissions);
+	});
+
+	socket.on('evaluate final answer', function(finalJeopardyObj){
+		io.emit('relay final', finalJeopardyObj);
 	});
 
 });

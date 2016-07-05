@@ -2,9 +2,10 @@ var dinger = {
 	connectedTeams: [],
 	categories: [],
 	questions: [],
+	finalJeopardy: {},
 	templateContainer: $('#templateContainer'),
 	connectToSocket: function(){
-		var socket = io.connect('http://localhost:8080');
+		var socket = io.connect('http://AriGonzo.local:8080');
 		this.socket = socket;
 		dinger.turnOnListeners();
 		dinger.getTeams();
@@ -14,12 +15,15 @@ var dinger = {
 			team_name: dinger.teamName
 		}, {
 			complete: function(){
+				dinger.getTeams();
 				dinger.addAllTeams();
 			}
 		});
 	},
 	addAllTeams: function(teams){
+		if (!teams) { teams = dinger.connectedTeams}
 		$('#teams').empty();
+		console.log(dinger.connectedTeams)
 		dinger.connectedTeams = teams;
 		dinger.connectedTeams.forEach(function(team){
 			dinger.addTeam(team);
@@ -33,12 +37,14 @@ var dinger = {
 			category3: dinger.categories[3],
 			category4: dinger.categories[4],
 			category5: dinger.categories[5],
+			finalJeopardyCategory: dinger.finalJeopardy.category
 		} , {
 			complete: function(){
 				$('.editQuestions').on('click', function(){
 					var index = $(this).attr('data-index');
 					dinger.editQuestions(dinger.questions[index], index);
 				});
+				$('#finalJeopardyEdit').on('click', dinger.editFinalJeopardy)
 			}
 		})
 	},
@@ -79,17 +85,20 @@ var dinger = {
 		});
 	},
 	turnOnListeners: function(){
+		$('#resetBtn').on('click', dinger.resetBtns);
+		$('#teamsButton').on('click', dinger.showTeamsAdmin);
+		$('#questionsButton').on('click', dinger.showQuestionsAdmin);
+		$('#finalJeopardyBtn').on('click', dinger.triggerFinalJeopardy);
 		dinger.socket.on('new team added', function(teamObj){
 			dinger.connectedTeams = teamObj.teams;
 			dinger.addTeam(teamObj.newTeam);
 		});
 		dinger.socket.on('team buzzed', dinger.handleTeamBuzz);
-		$('#resetBtn').on('click', dinger.resetBtns);
-		$('#teamsButton').on('click', dinger.showTeamsAdmin);
-		$('#questionsButton').on('click', dinger.showQuestionsAdmin);
 		dinger.socket.on('updateQuestions', dinger.updateQuestions);
 		dinger.socket.on('currentQuestion', dinger.setCurrentQuestion);
 		dinger.socket.on('emit score update', dinger.addAllTeams);
+		dinger.socket.on('final jeopardy array', dinger.updateFinal);
+		dinger.socket.on('relay final', dinger.evaluateAnswer);
 	},
 	handleTeamBuzz: function(teamObj){
 		$('#modalContainer').loadTemplate("../views/modalDing.html", {
@@ -107,7 +116,7 @@ var dinger = {
 		});
 	},
 	saveQuestions: function(){
-		dinger.socket.emit('saveQuestions', {categories: dinger.categories, questions: dinger.questions});
+		dinger.socket.emit('saveQuestions', {categories: dinger.categories, questions: dinger.questions, finalJeopardy: dinger.finalJeopardy});
 		setTimeout(function(){
 			$('#questionsButton').click();
 		}, 300)
@@ -115,6 +124,7 @@ var dinger = {
 	updateQuestions: function(questionsObj){
 		dinger.questions = questionsObj.questions;
 		dinger.categories = questionsObj.categories;
+		dinger.finalJeopardy = questionsObj.finalJeopardy;
 	},
 	resetBtns: function(){
 		dinger.socket.emit('reset');
@@ -140,6 +150,33 @@ var dinger = {
 			dinger.resetBtns();
 		}
 		dinger.socket.emit('update score', teamObj);
+	},
+	triggerFinalJeopardy: function(){
+		dinger.socket.emit('final jeopardy');
+	},
+	editFinalJeopardy: function(){
+		$('#modalContainer').loadTemplate("../views/modalFinalJeopardyEdit.html", {
+			category: dinger.finalJeopardy.category,
+			question: dinger.finalJeopardy.question,
+		}, {
+			complete: function(){
+				$('#modalBtn').click();
+				$('#saveChanges').on('click', function(){
+					var finalJeopardy = {
+						category: $('#category').val().trim(),
+						question: $('#question').val().trim(),
+					}
+					dinger.finalJeopardy = finalJeopardy;
+					dinger.saveQuestions();
+				});
+			}
+		})
+	},
+	updateFinal: function(finalArray){
+		dinger.finalArray = finalArray;
+	},
+	evaluateAnswer: function(finalJeopardyObj){
+		console.log(finalJeopardyObj);
 	}
 }
 

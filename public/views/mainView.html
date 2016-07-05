@@ -1,3 +1,40 @@
 <h1 data-content="team_name" class="text-center"></h1>
-
 <a href="javascript:void(0)" id="dingBtn" class="btn btn-success center-block">DING!!</a>
+
+<div class="row" id="finalJeopardy">
+	<div class="col-md-10 col-md-offset-1">
+		<div class="row">
+			<div class="col-md-12">
+				<textarea class="form-control" id="solutionInput" rows="5"></textarea>
+			</div>
+		</div>
+		<div class="row" id="finalWagerSubmitContainer">
+			<div class="col-md-10">
+					<input placeholder="Points Wager" id="wager" />
+			</div>
+			<div class="col-md-2>">
+				<a href="javascript:void(0)" id="submitFinal" class="btn btn-success">Submit Answer</a>	
+			</div>
+		</div>
+	</div>
+</div>
+
+<h1 class="text-center" id="thanks">Thanks for Playing!</h1>
+
+<!-- Modal -->
+
+<div class="modal fade" id="validationModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <h2 class="text-center">Please fill out all fields</h2>
+        <div class="text-center" id="modalButtons">
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+	<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary btn-lg hide modalBtn" data-toggle="modal" data-target="#validationModal"></button>

@@ -1,12 +1,13 @@
 var dinger = {
+	templateContainer: $('#templateContainer'),
 	connectToSocket: function(){
-		var socket = io.connect('http://localhost:8080');
+		var socket = io.connect('http://AriGonzo.local:8080');
 		this.socket = socket;
 		dinger.showSignUp();
+		dinger.socket.on('trigger final jeopardy', dinger.triggerFinalJeopardy)
 	},
 	emitCall: function(callName){
 		this.socket.on(callName, function (data) {
-		  console.log(data);
 		  dinger.socket.emit('my other event', { my: 'data' });
 		});
 	},
@@ -29,7 +30,28 @@ var dinger = {
 	dingding: function(){
 		dinger.socket.emit('ding', dinger.teamName);
 	},
-	templateContainer: $('#templateContainer'),
+	triggerFinalJeopardy: function(finalJeopardyObj){
+		$('#finalJeopardy').fadeIn();
+		$('#dingBtn').addClass('hide');
+		$('#submitFinal').on('click', dinger.submitFinalJeopardy);
+	},
+	submitFinalJeopardy: function(){
+		var solution = $('#solutionInput').val();
+		var wager = $('#wager').val().replace(/[^a-zA-Z0-9 ]/g, "");
+		if (solution == "" || wager == "") {
+			$('.modalBtn').click();
+			return
+		}
+		var finalJeopardyObj = {
+			team: dinger.teamName,
+			solution: solution,
+			wager: wager
+		};
+		$('#finalJeopardy').hide();
+		$('#thanks').fadeIn()
+		console.log(finalJeopardyObj)
+		dinger.socket.emit('submit final', finalJeopardyObj);
+	}
 }
 
 dinger.connectToSocket();

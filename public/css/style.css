@@ -38,16 +38,67 @@
 }
 
 /* Team Page */
+#playerContainer {
+  background-color: #4600FF;
+}
+
 #submitTeam {
-	font-size: 20pt;
+  font-size: 20pt;
+  color: #4600FF;
+  background: white;
+  font-family: 'Arvo', serif
+}
+
+#submitTeam:hover {
+  background-color: #efeded;
 }
 
 #dingBtn {
   width: 50%;
   padding: 30px;
   font-size: 35pt;
+  font-family: 'Bevan', cursive;
+  text-shadow: 1px 1px 6px #000;
+  background-color: #EAA77E;
 }
 
+#newTeamForm label, #playerContainer h1 {
+  color: white;
+  font-family: 'Arvo', serif;
+  text-shadow: 1px 1px 1px #777474;
+}
+
+/* Final Jeopardy */
+
+#finalJeopardy, #thanks {
+  display: none;
+}
+
+#solutionInput {
+  font-size: 17pt;
+}
+
+#wager {
+  font-size: 36pt;
+  font-family: 'Arvo', serif;
+}
+
+#submitFinal {
+  font-size: 17pt;
+  color: #4600FF;
+  background: white;
+  font-family: 'Arvo', serif; 
+  margin-top: 15px;
+}
+
+#finalWagerSubmitContainer {
+  margin-top: 15px
+}
+
+#thanks {
+  font-size: 45pt;
+  margin-top: 5ex;
+}
 
 /* Scoreboard */
 #scoreboard {
@@ -102,6 +153,8 @@
 #questionContent p{
   margin-top: 2ex;
 }
+
+/* Imports */
 
 @font-face {
   font-family: 'jeapordy';
