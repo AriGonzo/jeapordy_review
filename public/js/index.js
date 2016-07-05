@@ -32,8 +32,13 @@ var dinger = {
 		dinger.socket.emit('ding', dinger.teamName);
 	},
 	triggerFinalJeopardy: function(finalJeopardyObj){
-		$('#finalJeopardy').fadeIn();
+		$('#finalWagerSubmitContainer').fadeIn();
 		$('#dingBtn').addClass('hide');
+		$('#submitWager').on('click', dinger.submitWager);
+	},
+	submitWager: function(){
+		$('#finalWagerSubmitContainer').addClass('hide');
+		$('#finalJeopardy').fadeIn();
 		$('#submitFinal').on('click', dinger.submitFinalJeopardy);
 	},
 	submitFinalJeopardy: function(){
