@@ -52,8 +52,17 @@ io.on('connection', function (socket) {
 		}
 	});
 
+	socket.on('open question', function(){
+		dung = false;
+	});
+
 	socket.on('reset', function(){
 		dung = false;
+		teams = [];
+		questions = [];
+		categories = [];
+		finalJeopardySubmissions = [];
+		finalJeopardy = {};
 	});
 
 	socket.emit('updateQuestions', {categories: categories, questions: questions, finalJeopardy: finalJeopardy});

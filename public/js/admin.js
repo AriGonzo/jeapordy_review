@@ -17,8 +17,12 @@ var dinger = {
 			complete: function(){
 				dinger.getTeams();
 				dinger.addAllTeams();
+				$('#openQuestions').on('click', dinger.openQuestions);
 			}
 		});
+	},
+	openQuestions: function(){
+		dinger.socket.emit('open question');
 	},
 	addAllTeams: function(teams){
 		if (!teams) { teams = dinger.connectedTeams}
