@@ -5,7 +5,7 @@ var io = require('socket.io')(server);
 var path = require('path');
 var _ = require('underscore');
 
-server.listen(80);
+server.listen(8080);
 
 app.use(express.static('public'));
 
