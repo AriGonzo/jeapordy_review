@@ -27,10 +27,12 @@ var dinger = {
 		dinger.socket.on('final jeopardy array', dinger.updateFinal);
 	},
 	highlightDinger: function(teamObj){
-		$('#teams div[data-id="'+ teamObj.id +'"]').css('background', '#EAA77E')
+		$('#teams div[data-id="'+ teamObj.id +'"]').css('background', '#EAA77E');
+		dinger.startCounterBars()
 	},
 	unhighlightDinger: function(teamObj){
-		$('#teams div[data-id="'+ teamObj.id +'"]').css('background', 'inherit')
+		$('#teams div[data-id="'+ teamObj.id +'"]').css('background', 'inherit');
+		dinger.resetCounter();
 	},
 	scoreboardSquareShow: function(){
 		var thatJquery = $(this);
@@ -164,7 +166,6 @@ var dinger = {
 				$('.modalBtn').click();
 			}
 		})
-
 	},
 	startTimer: function(time){
 		if (time == 0) {
@@ -174,6 +175,17 @@ var dinger = {
 		time--
 		dinger.finalTimer = time;
 		$('#timer').text(time)
+	},
+	startCounterBars: function(){
+		var count = 5;
+		dinger.barsCounter = setInterval(function(){
+			$('#'+count).css('visibility', 'hidden');
+			count--;
+		}, 1000);
+	},
+	resetCounter: function(){
+		$('.countdownBars').css('visibility', 'visible');
+		clearInterval(dinger.barsCounter);
 	}
 }
 

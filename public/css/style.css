@@ -154,6 +154,20 @@
   margin-top: 2ex;
 }
 
+#counterBarsContainer {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+}
+
+.countdownBars {
+  width: 18%;
+  height: 18px;
+  background: #FFFF00;
+  display: inline-block;
+}
+
 /* Imports */
 
 @font-face {
