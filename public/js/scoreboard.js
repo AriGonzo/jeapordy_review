@@ -6,6 +6,7 @@ var dinger = {
 	finalTimer: 60,
 	connectToSocket: function(){
 		var socket = io.connect('https://sheltered-bayou-67211.herokuapp.com');
+		// var socket = io.connect('http://localhost:8080');
 		this.socket = socket;
 		dinger.turnOnListeners();
 		dinger.getTeams();
@@ -143,6 +144,7 @@ var dinger = {
 	},
 	nextFinal: function(currentIndex){
 		currentIndex++
+		console.log(dinger.finalArray.length)
 		if (currentIndex == dinger.finalArray.length) {
 			dinger.finalWinner();
 		} else {
@@ -151,7 +153,8 @@ var dinger = {
 	},
 	finalWinner: function(){
 		$('.modal-backdrop').hide(); 
-		$('#questionModal').hide()		
+		$('#questionModal').modal('hide');
+		$('#questionModal').hide();
 	},
 	startTimer: function(time){
 		if (time == 0) {

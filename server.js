@@ -27,7 +27,7 @@ var questions = [];
 var categories = [];
 var finalJeopardySubmissions = [];
 var finalJeopardy = {};
-var dung = false;
+var dung = true;
 
 io.on('connection', function (socket) {
 	
@@ -97,8 +97,11 @@ io.on('connection', function (socket) {
 		finalJeopardyObj.id = team.id;
 		finalJeopardyObj.score = team.score;
 		finalJeopardySubmissions.push(finalJeopardyObj);
-		console.log(finalJeopardySubmissions)
-		io.emit('final jeopardy array', finalJeopardySubmissions);
+		finalJeopardySubmissionsCompress = _.uniq(finalJeopardySubmissions, function(item, key, id) { 
+    return item.id;
+});
+		finalJeopardySubmissionsCompress = _.sortBy(finalJeopardySubmissionsCompress, 'id')
+		io.emit('final jeopardy array', finalJeopardySubmissionsCompress);
 	});
 
 	socket.on('evaluate final answer', function(finalJeopardyObj){

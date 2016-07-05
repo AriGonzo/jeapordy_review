@@ -3,9 +3,11 @@ var dinger = {
 	categories: [],
 	questions: [],
 	finalJeopardy: {},
+	currentQuestion: {},
 	templateContainer: $('#templateContainer'),
 	connectToSocket: function(){
 		var socket = io.connect('https://sheltered-bayou-67211.herokuapp.com');
+		// var socket = io.connect('http://localhost:8080');
 		this.socket = socket;
 		dinger.turnOnListeners();
 		dinger.getTeams();
@@ -180,7 +182,20 @@ var dinger = {
 		dinger.finalArray = finalArray;
 	},
 	evaluateAnswer: function(finalJeopardyObj){
-		console.log(finalJeopardyObj);
+		$('#modalContainer').loadTemplate("../views/modalDing.html", {
+			team_name: finalJeopardyObj.team
+		},{
+			complete: function(){
+				dinger.currentQuestion.value = parseInt(finalJeopardyObj.wager);
+				$('#modalBtn').click();
+				$('#wrongAnswer').on('click', function(){
+					dinger.adjustScore(false, dinger.connectedTeams[finalJeopardyObj.id]);
+				});
+				$('#rightAnswer').on('click', function(){
+					dinger.adjustScore(true, dinger.connectedTeams[finalJeopardyObj.id]);
+				});
+			}
+		});
 	}
 }
 

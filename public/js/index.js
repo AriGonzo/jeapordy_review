@@ -2,6 +2,7 @@ var dinger = {
 	templateContainer: $('#templateContainer'),
 	connectToSocket: function(){
 		var socket = io.connect('https://sheltered-bayou-67211.herokuapp.com');
+		// var socket = io.connect('http://localhost:8080');
 		this.socket = socket;
 		dinger.showSignUp();
 		dinger.socket.on('trigger final jeopardy', dinger.triggerFinalJeopardy)
