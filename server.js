@@ -98,14 +98,18 @@ io.on('connection', function (socket) {
 		finalJeopardyObj.score = team.score;
 		finalJeopardySubmissions.push(finalJeopardyObj);
 		finalJeopardySubmissionsCompress = _.uniq(finalJeopardySubmissions, function(item, key, id) { 
-    return item.id;
-});
+    	return item.id;
+		});
 		finalJeopardySubmissionsCompress = _.sortBy(finalJeopardySubmissionsCompress, 'id')
 		io.emit('final jeopardy array', finalJeopardySubmissionsCompress);
 	});
 
 	socket.on('evaluate final answer', function(finalJeopardyObj){
 		io.emit('relay final', finalJeopardyObj);
+	});
+
+	socket.on('times up', function(){
+		io.emit('relay times up')
 	});
 
 });

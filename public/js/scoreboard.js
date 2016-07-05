@@ -181,7 +181,12 @@ var dinger = {
 		dinger.barsCounter = setInterval(function(){
 			$('#'+count).css('visibility', 'hidden');
 			count--;
-		}, 1000);
+			if (count == 0) {
+				var audio = new Audio('../audio/timeup.mp3');
+				audio.play();
+				dinger.socket.emit('times up');
+			}
+		}, 1250);
 	},
 	resetCounter: function(){
 		$('.countdownBars').css('visibility', 'visible');

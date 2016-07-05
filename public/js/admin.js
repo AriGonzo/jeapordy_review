@@ -105,6 +105,7 @@ var dinger = {
 		dinger.socket.on('emit score update', dinger.addAllTeams);
 		dinger.socket.on('final jeopardy array', dinger.updateFinal);
 		dinger.socket.on('relay final', dinger.evaluateAnswer);
+		dinger.socket.on('relay times up', dinger.timesUpYouLose)
 	},
 	handleTeamBuzz: function(teamObj){
 		$('#modalContainer').loadTemplate("../views/modalDing.html", {
@@ -200,6 +201,9 @@ var dinger = {
 				});
 			}
 		});
+	},
+	timesUpYouLose: function(){
+		$('#wrongAnswer').click();
 	}
 }
 
