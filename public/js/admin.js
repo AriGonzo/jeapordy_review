@@ -135,6 +135,7 @@ var dinger = {
 	},
 	resetBtns: function(){
 		dinger.socket.emit('reset');
+		location.reload();
 	},
 	getTeams: function(){
 		dinger.socket.emit('grab teams');

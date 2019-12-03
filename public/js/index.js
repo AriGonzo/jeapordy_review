@@ -15,6 +15,12 @@ var dinger = {
 	showSignUp: function(){
 		this.templateContainer.loadTemplate("../views/signup.html")
 		$(document).on('click', '#submitTeam', dinger.submitTeam)
+		$(document).on('keypress', '#teamName', function(e){
+			if(e.which == 13) {
+				e.preventDefault()
+				dinger.submitTeam()
+			}
+		})
 	},
 	showTeamPage: function(){
 		this.templateContainer.loadTemplate("../views/mainView.html", {
