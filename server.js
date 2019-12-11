@@ -65,7 +65,7 @@ io.on('connection', function (socket) {
 		finalJeopardy = {};
 	});
 
-	socket.emit('updateQuestions', {categories: categories, questions: questions, finalJeopardy: finalJeopardy});
+	// socket.emit('updateQuestions', {categories: categories, questions: questions, finalJeopardy: finalJeopardy});
 
 	socket.on('saveQuestions', function(questionsObj){
 		console.log('received questions', questionsObj)
@@ -88,8 +88,8 @@ io.on('connection', function (socket) {
 		io.emit('unhighlight', teamObj);
 	});
 
-	socket.on('final jeopardy', function(){
-		io.emit('trigger final jeopardy', finalJeopardy)
+	socket.on('final jeopardy', function(fj){
+		io.emit('trigger final jeopardy', fj)
 	});
 
 	socket.on('submit final', function(finalJeopardyObj){

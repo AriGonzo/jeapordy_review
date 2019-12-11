@@ -124,6 +124,27 @@
 		<!-- Modal -->
 		<div id="modalContainer"></div>
 	</body>
+	<!-- The core Firebase JS SDK is always required and must be listed first -->
+	<script src="https://www.gstatic.com/firebasejs/7.5.2/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/7.5.2/firebase-database.js"></script>
+
+	<!-- TODO: Add SDKs for Firebase products that you want to use
+         https://firebase.google.com/docs/web/setup#available-libraries -->
+
+	<script>
+		// Your web app's Firebase configuration
+		var firebaseConfig = {
+			apiKey: "AIzaSyDjCJepqXT9E265Qr6NZb7hSB5XNIKwUsw",
+			authDomain: "jeopardy-4c4fc.firebaseapp.com",
+			databaseURL: "https://jeopardy-4c4fc.firebaseio.com",
+			projectId: "jeopardy-4c4fc",
+			storageBucket: "jeopardy-4c4fc.appspot.com",
+			messagingSenderId: "161363988032",
+			appId: "1:161363988032:web:31aba79b813b424b1999a5"
+		};
+		// Initialize Firebase
+		firebase.initializeApp(firebaseConfig);
+	</script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
 	<script src="/socket.io/socket.io.js"></script>
 	<script src="lib/jquery.loadTemplate-1.5.7.min.js"></script>

@@ -1,4 +1,5 @@
 var dinger = {
+	firebase: firebase.database(),
 	scoreboardSquare: $('.scoreboardSquare'),
 	connectedTeams: [],
 	categories: [],
@@ -18,7 +19,12 @@ var dinger = {
 			dinger.addTeam(teamObj.newTeam);
 		});
 		this.scoreboardSquare.on('click', dinger.scoreboardSquareShow);
-		dinger.socket.on('updateQuestions', dinger.updateQuestions)
+		// dinger.socket.on('updateQuestions', dinger.updateQuestions)
+		dinger.firebase.ref('questions/').on('value', function(data){
+			dinger.categories = data.val().categories;
+			dinger.questions = data.val().questions;
+			dinger.updateCategories();
+		});
 		dinger.updateCategories();
 		dinger.socket.on('emit score update', dinger.addAllTeams);
 		dinger.socket.on('team buzzed', dinger.highlightDinger);

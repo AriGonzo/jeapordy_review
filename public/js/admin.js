@@ -1,5 +1,6 @@
 var dinger = {
 	connectedTeams: [],
+	firebase: firebase.database(),
 	categories: [],
 	questions: [],
 	finalJeopardy: {},
@@ -100,7 +101,12 @@ var dinger = {
 			dinger.addTeam(teamObj.newTeam);
 		});
 		dinger.socket.on('team buzzed', dinger.handleTeamBuzz);
-		dinger.socket.on('updateQuestions', dinger.updateQuestions);
+		// dinger.socket.on('updateQuestions', dinger.updateQuestions);
+		dinger.firebase.ref('questions/').on('value', function(data){
+			dinger.categories = data.val().categories || [];
+			dinger.questions = data.val().questions || [];
+			dinger.finalJeopardy = data.val().finalJeopardy || {};
+		});
 		dinger.socket.on('currentQuestion', dinger.setCurrentQuestion);
 		dinger.socket.on('emit score update', dinger.addAllTeams);
 		dinger.socket.on('final jeopardy array', dinger.updateFinal);
@@ -123,10 +129,13 @@ var dinger = {
 		});
 	},
 	saveQuestions: function(){
-		dinger.socket.emit('saveQuestions', {categories: dinger.categories, questions: dinger.questions, finalJeopardy: dinger.finalJeopardy});
-		setTimeout(function(){
-			$('#questionsButton').click();
-		}, 300)
+
+		// dinger.socket.emit('saveQuestions', {categories: dinger.categories, questions: dinger.questions, finalJeopardy: dinger.finalJeopardy});
+		dinger.firebase.ref('questions/').set({categories: dinger.categories, questions: dinger.questions, finalJeopardy: dinger.finalJeopardy}).then(function(){
+			setTimeout(function(){
+				$('#questionsButton').click();
+			}, 300)
+		});
 	},
 	updateQuestions: function(questionsObj){
 		dinger.questions = questionsObj.questions;
@@ -135,6 +144,7 @@ var dinger = {
 	},
 	resetBtns: function(){
 		dinger.socket.emit('reset');
+		dinger.firebase.ref('questions/').set({categories: [], questions: [], finalJeopardy: {}})
 		location.reload();
 	},
 	getTeams: function(){
@@ -164,7 +174,7 @@ var dinger = {
 
 	},
 	triggerFinalJeopardy: function(){
-		dinger.socket.emit('final jeopardy');
+		dinger.socket.emit('final jeopardy', dinger.finalJeopardy);
 	},
 	editFinalJeopardy: function(){
 		$('#modalContainer').loadTemplate("../views/modalFinalJeopardyEdit.html", {
