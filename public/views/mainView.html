@@ -1,31 +1,17 @@
 <h1 data-content="team_name" class="text-center"></h1>
 <a href="javascript:void(0)" id="dingBtn" class="btn btn-success center-block">DING!!</a>
 
-<div class="row" id="finalWagerSubmitContainer">
-	<div class="col-md-5 col-md-offset-3">
-			<input placeholder="Points Wager" id="wager" />
-	</div>
-	<div class="col-md-2>">
-		<a href="javascript:void(0)" id="submitWager" class="btn btn-success">Submit Answer</a>	
-	</div>
+<div id="finalWagerSubmitContainer" class="hide col-md-8 col-md-offset-2">
+	<input placeholder="Points Wager" id="wager" />
+	<a href="javascript:void(0)" id="submitWager" class="btn btn-success">Submit Answer</a>
 </div>
 
-<div class="row" id="finalJeopardy">
-	<div class="col-md-10 col-md-offset-1">
-		<div class="row">
-			<div class="col-md-12">
-				<textarea class="form-control" id="solutionInput" rows="5"></textarea>
-			</div>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-2 col-md-offset-9">
-			<a href="javascript:void(0)" id="submitFinal" class="btn btn-success">Submit Answer</a>	
-		</div>
-	</div>
+<div id="finalJeopardy" class="col-md-8 col-md-offset-2 hide">
+	<textarea class="form-control" id="solutionInput" rows="5"></textarea>
+	<a href="javascript:void(0)" id="submitFinal" class="btn btn-success">Submit Answer</a>
 </div>
 
-<h1 class="text-center" id="thanks">Thanks for Playing!</h1>
+<h1 class="text-center hide" id="thanks">Thanks for Playing!</h1>
 
 <!-- Modal -->
 
