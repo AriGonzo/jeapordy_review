@@ -190,7 +190,6 @@ var dinger = {
 			if (count == 0) {
 				var audio = new Audio('../audio/timeup.mp3');
 				audio.play();
-				dinger.socket.emit('times up');
 			}
 		}, 1250);
 	},

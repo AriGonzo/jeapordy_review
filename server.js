@@ -5,6 +5,7 @@ var io = require('socket.io')(server);
 var path = require('path');
 var _ = require('underscore');
 
+console.log('starting')
 server.listen(process.env.PORT || 8080);
 
 app.use(express.static('public'));
@@ -40,16 +41,16 @@ io.on('connection', function (socket) {
 			name: data,
 			score: 0
 		}
-		teams.push(teamObj);
-		io.emit('new team added', {teams: teams, newTeam: teamObj});
+		if (!_.findWhere(teams, {name: data})) {
+			teams.push(teamObj);
+			io.emit('new team added', {teams: teams, newTeam: teamObj});
+		}
 	});
 
 	socket.on('ding', function(data){
-		if (!dung) {
-			var teamObj = _.findWhere(teams, {name: data});
-			io.emit('team buzzed', teamObj)
-
-		}
+		console.log('dinged', data)
+		var teamObj = _.findWhere(teams, {name: data});
+		io.emit('team buzzed', teamObj)
 	});
 
 	socket.on('open question', function(){
@@ -108,8 +109,5 @@ io.on('connection', function (socket) {
 		io.emit('relay final', finalJeopardyObj);
 	});
 
-	socket.on('times up', function(){
-		io.emit('relay times up')
-	});
 
 });

@@ -74,6 +74,12 @@
   flex-direction: column;
 }
 
+#headerTeamInfo {
+  display: flex;
+  justify-content: space-evenly;
+  color: white;
+  align-items: center;
+}
 
 /* Final Jeopardy */
 

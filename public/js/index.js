@@ -6,6 +6,14 @@ var dinger = {
 		this.socket = socket;
 		dinger.showSignUp();
 		dinger.socket.on('trigger final jeopardy', dinger.triggerFinalJeopardy)
+		dinger.socket.on('emit score update', dinger.updateScore);
+	},
+	updateScore: function(teams){
+		teams.forEach(function (team) {
+			if (team.name === dinger.teamName) {
+				$('#currentScore').html(team.score)
+			}
+		})
 	},
 	emitCall: function(callName){
 		this.socket.on(callName, function (data) {

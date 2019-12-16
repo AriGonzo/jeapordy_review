@@ -20,12 +20,8 @@ var dinger = {
 			complete: function(){
 				dinger.getTeams();
 				dinger.addAllTeams();
-				$('#openQuestions').on('click', dinger.openQuestions);
 			}
 		});
-	},
-	openQuestions: function(){
-		dinger.socket.emit('open question');
 	},
 	addAllTeams: function(teams){
 		if (!teams) { teams = dinger.connectedTeams}
@@ -165,7 +161,6 @@ var dinger = {
 			teamObj.score += dinger.currentQuestion.value;
 		} else {
 			teamObj.score -= dinger.currentQuestion.value;
-			dinger.openQuestions();
 		}
 		dinger.socket.emit('update score', teamObj);
 		$('.modal-backdrop').hide(); 
