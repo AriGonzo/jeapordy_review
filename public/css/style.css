@@ -22,8 +22,8 @@
 }
 
 #teamName {
-	font-size: 16pt;
-	height: 60px;
+  font-size: 26pt;
+  height: 100px;
 }
 
 #modalButtons button {
@@ -43,6 +43,7 @@
 }
 
 #submitTeam {
+  margin-top: 20px;
   font-size: 20pt;
   color: #4600FF;
   background: white;
@@ -54,8 +55,8 @@
 }
 
 #dingBtn {
-  width: 50%;
-  padding: 30px;
+  width: 90%;
+  padding: 40px;
   font-size: 35pt;
   font-family: 'Bevan', cursive;
   text-shadow: 1px 1px 6px #000;
@@ -67,6 +68,12 @@
   font-family: 'Arvo', serif;
   text-shadow: 1px 1px 1px #777474;
 }
+
+#newTeamForm > div {
+  display: flex;
+  flex-direction: column;
+}
+
 
 /* Final Jeopardy */
 
@@ -110,7 +117,7 @@
 	text-shadow: 1px 1px 1px #000;
 }
 
-#templateContainer {
+.scoreboardWrapper {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
 }
@@ -120,7 +127,7 @@
 	padding-right: 0;
 }
 
-#templateContainer h2 {
+.scoreboardWrapper h2 {
   font-size: 40px;
   font-family: jeapordy;
 	color: white;

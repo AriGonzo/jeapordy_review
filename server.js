@@ -27,7 +27,7 @@ var questions = [];
 var categories = [];
 var finalJeopardySubmissions = [];
 var finalJeopardy = {};
-var dung = true;
+var dung = false;
 
 io.on('connection', function (socket) {
 	
@@ -48,7 +48,7 @@ io.on('connection', function (socket) {
 		if (!dung) {
 			var teamObj = _.findWhere(teams, {name: data});
 			io.emit('team buzzed', teamObj)
-			dung = true;
+
 		}
 	});
 
