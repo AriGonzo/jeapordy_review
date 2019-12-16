@@ -110,13 +110,18 @@
 	text-shadow: 1px 1px 1px #000;
 }
 
+#templateContainer {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+}
+
 .sectionColumns {
 	padding-left: 0;
 	padding-right: 0;
 }
 
-.sectionColumns h2 {
-  font-size: 52px;
+#templateContainer h2 {
+  font-size: 40px;
   font-family: jeapordy;
 	color: white;
 	text-shadow: 1px 1px 1px #000;
